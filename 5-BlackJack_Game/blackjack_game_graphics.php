@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-<p><?php echo chr(hexdec("&#x1F0A0")) ?></p>
+<p><?php echo "ci godo le mie palle" ?></p>
 </body>
 </html>
 header("Location: ../work_in_progress.html");
