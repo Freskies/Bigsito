@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-<p><?php echo "ci godo le mie palle" ?></p>
+<p><?php echo "ci godo le mie palle sudate" ?></p>
 </body>
 </html>
 header("Location: ../work_in_progress.html");
