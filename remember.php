@@ -19,7 +19,7 @@ function remember_game_home ():void
 
 function remember_game_running ():void
 {
-    if (!isset($_POST['play'])) {
-        if (!isset($_SESSION['p1'])) header("Location: ../index.php");
-    }
+    if (!isset($_POST['play']))
+        if (!isset($_SESSION['remember_param']))
+            header("Location: ../index.php");
 }

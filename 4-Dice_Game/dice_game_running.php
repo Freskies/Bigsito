@@ -16,8 +16,10 @@ function unset_game (): void
     unset($_SESSION['roll_p1']);
     unset($_SESSION['roll_p2']);
     unset($_SESSION['win']);
+    unset($_SESSION['remember_param']);
 }
 
+// first time
 if (isset($_POST['p1'])) {
     $_SESSION['p1'] = $_POST['p1'];
     $_SESSION['p2'] = $_POST['p2'];
@@ -25,6 +27,7 @@ if (isset($_POST['p1'])) {
     $_SESSION['roll_p1'] = array();
     $_SESSION['roll_p2'] = array();
     $_SESSION['win'] = false;
+    $_SESSION['remember_param'] = $_SESSION['p1']; // for remember function
 }
 
 if (isset($_POST['roll'])) {

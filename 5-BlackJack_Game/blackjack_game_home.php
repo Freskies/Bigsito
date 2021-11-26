@@ -43,7 +43,7 @@ require 'blackjack_game_logic.php';
         <div class="container">
             <label><b>Name Player</b></label>
             <label>
-                <input type="text" placeholder="Enter the name of the player 1" name="p1" required>
+                <input type="text" placeholder="Enter the name of the player 1" name="p" required>
             </label>
 
             <button type="submit" name="play">Play</button>
