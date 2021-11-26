@@ -46,8 +46,9 @@ require 'dice_game_logic.php';
             <th>End 2</th>
         </tr>
         <tr>
-            <td>one of the 2 players scores 12 and wins</td>
-            <td>one of the 2 players rolls a combination of dice already rolled and lose</td>
+            <td>one of the 2 players scores <span class="winner"><b>12</b></span> and wins</td>
+            <td>one of the 2 players rolls a combination of dice
+                <span class="loser"><b>already rolled</b></span> and lose</td>
         </tr>
     </table>
     <br>
@@ -58,7 +59,7 @@ require 'dice_game_logic.php';
 
 <div id="id01" class="modal">
 
-    <form class="modal-content animate" action="dice_game_running.php" method="post">
+    <form class="modal-content animate" action="dice_game_graphics.php" method="post">
         <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         </div>

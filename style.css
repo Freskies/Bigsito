@@ -15,6 +15,14 @@ body {
     opacity: 0.8;
 }
 
+/* GAMES */
+span.winner {
+    color: #008000;
+}
+span.loser {
+    color: #ff1a1a;
+}
+
 .exit {
     background-color: #f44336;
 }

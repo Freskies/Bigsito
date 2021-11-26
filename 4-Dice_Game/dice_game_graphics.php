@@ -3,20 +3,22 @@
 * 5A(IN) - Computer Class
 * */
 
+use JetBrains\PhpStorm\Pure;
+
 session_start();
 require_once "../remember.php";
 remember_game_running();
 require 'dice_game_logic.php';
 
-function unset_game (): void
+#[Pure] function get_print_roll ($roll, $player): string
 {
-    unset($_SESSION['p1']);
-    unset($_SESSION['p2']);
-    unset($_SESSION['turn']);
-    unset($_SESSION['roll_p1']);
-    unset($_SESSION['roll_p2']);
-    unset($_SESSION['win']);
-    unset($_SESSION['remember_param']);
+    $print_roll = "<span";
+    if ($roll == 66) $print_roll .= " class='winner'";
+    else if ($_SESSION['win'] && $_SESSION['turn'] != $player && areLoserDice($roll))
+        $print_roll .= " class='loser'";
+    $print_roll .= ">" . getCharDice($roll) . "</span>";
+
+    return $print_roll;
 }
 
 // first time
@@ -33,20 +35,21 @@ if (isset($_POST['p1'])) {
 if (isset($_POST['roll'])) {
     $dice1 = rollDice();
     $dice2 = rollDice();
-    $total_dice = ($dice1 * 10) + $dice2;
 
-    if (trueEnd($total_dice)) $_SESSION['win'] = true;
-    $lose = false;
-    if (secondEnd($total_dice, $_SESSION[$_SESSION['turn'] ? 'roll_p1' : 'roll_p2'])) {
-        $_SESSION['win'] = true;
-        $lose = true;
-    }
+    $_SESSION['dice_rolled'] = ($dice1 * 10) + $dice2;
 
     // add results to table
-    $_SESSION[$_SESSION['turn'] ? 'roll_p1' : 'roll_p2'][] = $total_dice;
+    $_SESSION[$_SESSION['turn'] ? 'roll_p1' : 'roll_p2'][] = $_SESSION['dice_rolled'];
 
-    $_SESSION['turn'] = $_SESSION['win'] ? $_SESSION['turn'] : !$_SESSION['turn'];
-    if ($lose) $_SESSION['turn'] = !$_SESSION['turn'];
+    if (trueEnd($_SESSION['dice_rolled'])) $_SESSION['win'] = true;
+    else if (secondEnd($_SESSION['dice_rolled'], $_SESSION[$_SESSION['turn'] ? 'roll_p1' : 'roll_p2'])) {
+        $_SESSION['win'] = true;
+        $_SESSION['turn'] = !$_SESSION['turn'];
+    }
+    // the game continue
+    else {
+        $_SESSION['turn'] = !$_SESSION['turn'];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -66,6 +69,9 @@ if (isset($_POST['roll'])) {
         td, th {
             padding: 0 15px;
         }
+        td.dice {
+            font-size: 40px;
+        }
     </style>
 </head>
 <body>
@@ -84,16 +90,16 @@ if (isset($_POST['roll'])) {
         </tr>
         <?php
         for ($i = 0; $i < sizeof($_SESSION['roll_p1']); $i++) {
-            echo "<tr><td>";
-            echo getRolls($_SESSION['roll_p1'][$i]) . "</td><td>" .
-                (isset($_SESSION['roll_p2'][$i]) ? getRolls($_SESSION['roll_p2'][$i]) : "");
+            echo "<tr><td class='dice'>";
+            echo get_print_roll($_SESSION['roll_p1'][$i], true) . "</td><td class='dice'>" .
+                (isset($_SESSION['roll_p2'][$i]) ? get_print_roll($_SESSION['roll_p2'][$i], false) : "");
             echo "</td></tr>";
         }
         ?>
     </table>
 
     <br>
-    <form action="dice_game_running.php" method="post" style="background-color: #888888">
+    <form action="dice_game_graphics.php" method="post" style="background-color: #888888">
         <?php
         if ($_SESSION['win']) unset_game ();
         else echo "<button style='width:auto;' type='submit' name='roll''>Roll</button>";

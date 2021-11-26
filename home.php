@@ -45,8 +45,10 @@ if(isset($_POST['background_img']))
             style="width:auto;">Number Encryption</button><br>
     <button onclick="location.href = '4-Dice_Game/dice_game_home.php';"
             style="width:auto;">Dice Game</button>
-    <button onclick="location.href = '5-BlackJack_Game/blackjack_game_graphics.php';"
-            style="width:auto;">BlackJack Game</button><br>
+    <button onclick="location.href = '5-BlackJack_Game/blackjack_game_home.php';"
+            style="width:auto;">BlackJack Game</button>
+    <button onclick="location.href = 'work_in_progress.html';"
+            style="width:auto;">Roulette Game</button><br>
     <button class="exit" onclick="location.href = 'index.php';"
             style="width:auto;">EXIT</button>
 </div>
