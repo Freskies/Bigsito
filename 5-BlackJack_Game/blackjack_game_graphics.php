@@ -2,6 +2,16 @@
 /* Giacchini Valerio
 * 5A(IN) - Computer Class
 * */
+
+session_start();
+require_once "../remember.php";
+remember_game_running();
+require "blackjack_game_logic.php";
+
+function unset_game (): void
+{
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -11,7 +21,6 @@
     <title></title>
 </head>
 <body>
-<p><?php echo "ci godo le mie palle sudate" ?></p>
+<p style="font-size: 90px"><?php echo getCard(0, 13) ?></p>
 </body>
 </html>
-header("Location: ../work_in_progress.html");
