@@ -48,11 +48,24 @@ if (isset($_POST['p'])) {
 </head>
 <body>
 <div class="myscript">
-
+    <table style="margin: auto; table-layout: fixed">
+        <tr>
+            <th><?php echo "<h2>" . DEALER . "</h2>" ?></th>
+            <th><?php echo "<h2>" . $_SESSION['player'] . "</h2>" ?></th>
+        </tr>
+        <?php
+        for ($i = 0; $i < 1; $i++) {
+            echo "<tr><td class='dice'>";
+            echo getCard(10, SPADES) . getCard(1, DIAMONDS) . "</td><td class='dice'>" .
+                getCard(10, HEARTS);
+            echo "</td></tr>";
+        }
+        ?>
+    </table>
     <br>
     <form action="blackjack_game_graphics.php" method="post" style="background-color: #888888">
-        <button style='width:auto;' type='submit' name='card''>Card</button>
-        <button style='width:auto;' type='submit' name='stand''>Stand</button>
+        <button style='width:auto;' type='submit' name='card'>Card</button>
+        <button style='width:auto;' type='submit' name='stand'>Stand</button>
     </form>
     <button class="exit" onclick="location.href = '../home.php';"
             style="width:auto;">EXIT</button>
